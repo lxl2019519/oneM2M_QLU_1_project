@@ -1,0 +1,7 @@
+README.assets filter=lfs diff=lfs merge=lfs -text
+README.md filter=lfs diff=lfs merge=lfs -text
+STM32 filter=lfs diff=lfs merge=lfs -text
+device_main filter=lfs diff=lfs merge=lfs -text
+onem2m-platform filter=lfs diff=lfs merge=lfs -text
+Android filter=lfs diff=lfs merge=lfs -text
+Pet filter=lfs diff=lfs merge=lfs -text

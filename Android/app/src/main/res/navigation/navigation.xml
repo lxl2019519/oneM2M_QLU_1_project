@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/anvigation"
+    app:startDestination="@id/oneFragment">
+
+    <fragment
+        android:id="@+id/oneFragment"
+        android:name="com.example.tset.OneFragment"
+        android:label="FOOD"
+        tools:layout="@layout/fragment_one" />
+    <fragment
+        android:id="@+id/twoFragment"
+        android:name="com.example.tset.TwoFragment"
+        android:label="WATER"
+        tools:layout="@layout/fragment_two" />
+</navigation>

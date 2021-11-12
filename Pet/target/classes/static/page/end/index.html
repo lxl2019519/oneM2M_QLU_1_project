@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <meta HTTP-EQUIV="expires" CONTENT="0">
+    <title>首页</title>
+    <link rel="stylesheet" href="../../css/element.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/reset.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- Bootstrap 的 CSS 文件 -->
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+
+    <style>
+        #btn1:hover{
+            text-decoration:underline;
+            text-decoration-color: #0069d9;
+        }
+        #btn2:hover{
+            text-decoration:underline;
+            text-decoration-color: #0069d9;
+        }
+        #btn3:hover{
+            text-decoration:underline;
+            text-decoration-color: #0069d9;
+        }
+    </style>
+
+</head>
+<body>
+<div id="wrapper" v-cloak>
+                    <div style="margin: 10px 0"><el-button  @click="location.href = '/page/front/frame.html'">Back</el-button></div>
+                    <el-divider content-position="left">Console</el-divider>
+    <section class="buttons">
+        <div class="container">
+
+            <button id="refreshbutton" type="button" class="btn btn-primary"
+                    >
+                Refresh
+            </button>
+
+            <!--svg hover inspired by https://codepen.io/karimbalaa/pen/qERbBY?editors=110 -->
+
+
+            <button id="ultbtn" href="#" class="btn btn-info">
+                Food remaining
+            </button>
+            <!--                        -->
+            <button href="waterbtn" class="btn btn-success">
+                Water storage
+            </button>
+
+            <button id="postwaterbtn" href="#" class="btn btn-danger">
+                Add Water
+            </button>
+
+            <button id="postfoodbtn" href="#" class="btn btn-warning">
+                Add Food
+            </button>
+
+<!--            <select id="locale">-->
+<!--                <option value="zh_CN">中文简体</option>-->
+<!--                <option value="zh_TW">中文繁体</option>-->
+<!--                <option value="en_US">English</option>-->
+<!--            </select>-->
+
+        </div>
+    </section>
+    <el-row :gutter="10">
+        <el-col :span="12">
+            <el-card>
+                <div slot="header" class="clearfix">
+                    <h3>Notification Center</h3>
+                </div>
+
+                <div class="container">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card" >
+                            <div class="card-header"  id="headingOne">
+                                <button class="collapse" style="display: inline ;text-shadow: none" id="btn1"
+                                        data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <h4 class="text-primary">Current amount of food left in the bowl</h4>
+                                </button>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body" id="a01" style="text-align: center;">
+                                    <code>please refresh</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 500px">
+                            <div class="card-header" style="height: 70px" id="headingTwo">
+
+                                <button class="collapsed" type="button" style="display: inline" id="btn2"
+                                        data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <h4 class="text-primary"> Current amount of water left in the bowl</h4>
+                                </button>
+
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body" id="a02" style="text-align: center;">
+                                    <code>please refresh</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 500px" >
+                            <div class="card-header" style="height: 70px" id="headingThree">
+
+                                <button class="collapsed" type="button" style="display: inline" id="btn3"
+                                        data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <h4 class="text-primary"> Current temperature & humidity</h4>
+                                </button>
+
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body" id="a03" style="text-align: center;">
+                                    <code>please refresh</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+</el-card>
+        </el-col>
+
+
+        <el-col :span="12">
+            <el-card>
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="main" style="width: 100%;height:400px; margin: 0 auto"></div>
+            </el-card>
+        </el-col>
+
+    </el-row>
+
+    <el-row style="padding: 5px 0">
+        <el-col :span="24">
+            <el-card>
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="polyline" style="width: 100%;height:400px; margin: 0 auto"></div>
+            </el-card>
+        </el-col>
+    </el-row>
+
+    <el-row style="padding: 5px 0">
+        <el-col :span="24">
+            <el-card>
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="bar" style="width: 100%;height:400px; margin: 0 auto"></div>
+            </el-card>
+        </el-col>
+    </el-row>
+
+
+</div>
+
+
+<script src="../../js/echarts.min.js"></script>
+<script src="../../js/china.js"></script>
+<script src="../../js/jquery1.min.js"></script>
+<script src="../../js/vue.min.js"></script>
+<script src="../../js/element.js"></script>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    const pieOption = {
+        title: {text: 'water'},
+        tooltip: {trigger: 'item'},
+        legend: {top: '0', left: 'right'},
+
+        series: [
+            {
+                name: 'Referrer',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                color:['#73c0de','#f0f0f0'],
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '20',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 1248, name: 'water height' },
+                    { value: 536, name: '' }]
+            }
+        ]
+    };
+
+    const lineOption = {
+        title: {text: ''},
+        tooltip: {trigger: 'axis'},
+        legend: {data: ['temperature(℃)', 'humidity(%RH)']},
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        },
+        yAxis: {type: 'value'},
+        series: [
+            {
+                name: 'temperature(℃)',
+                type: 'line',
+                data: [14, 17, 21, 20, 13, 10, 12]
+            },
+            {
+                name: 'humidity(%RH)',
+                type: 'line',
+                data: [72, 92, 60, 80, 75, 74, 80]
+            }
+        ]
+    };
+
+    const barOption = {
+        title: {text: ''},
+        tooltip: {trigger: 'axis'},
+        legend: {data: [ 'Remaining amount of food(g)', 'Remaining amount of water(ml)']},
+        xAxis: {
+            type: 'category',
+            data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        },
+        yAxis: {type: 'value'},
+        series: [
+            {
+                name:'Remaining amount of food(g)',
+                type: 'bar',
+                data: [150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+                name: 'Remaining amount of water(ml)',
+                type: 'bar',
+                data: [320, 332, 301, 334, 390, 330, 320]
+            }
+        ]
+    };
+
+    new Vue({
+        el: "#wrapper",
+        data: {
+            active: 0,
+            users: [],
+            roles: [],
+            permissions: [],
+            notices: [],
+            user: {},
+            tableData: [],
+            pageNum: 1,
+            pageSize: 10,
+            total: 0,
+            dialogFormVisible: false,
+            entity: {},
+            isCollapse: false
+        },
+        mounted() {
+            this.user = sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")) : {};
+            this.load();
+        },
+        methods: {
+            load() {
+                $.get("/api/notice/").then((res) => {
+                    this.notices = res.data;
+                })
+
+                // 基于准备好的dom，初始化echarts实例
+                let myChart = echarts.init(document.getElementById('main'));
+                $.ajax({
+                    url: "/api/user",
+                    success(res) {
+                        let address = Array.from(new Set(res.data.map(v => v.address)))
+                        address.forEach(item => {
+                            let count = res.data.filter(v => v.address === item).length
+                            pieOption.series[0].data.push({name: item, value: count})
+                        })
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(pieOption);
+                    }
+                })
+
+
+
+                // 基于准备好的dom，初始化echarts实例
+                let lineChart = echarts.init(document.getElementById('polyline'));
+                // 使用刚指定的配置项和数据显示图表。
+                lineChart.setOption(lineOption);
+
+                // 基于准备好的dom，初始化echarts实例
+                let barChart = echarts.init(document.getElementById('bar'));
+                // 使用刚指定的配置项和数据显示图表。
+                barChart.setOption(barOption);
+
+            },
+            handleCollapse() {
+                this.isCollapse = !this.isCollapse;
+            },
+            logout() {
+                $.get("/api/user/logout");
+                sessionStorage.removeItem("user");
+                location.href = "/page/end/login.html";
+            }
+        }
+    })
+</script>
+
+
+<script>
+// <!--全部数据刷新-->
+    $("#refreshbutton").click(function () {
+        // alert("hello");
+        console.log("=======")
+        $.ajax({
+            url:"/api/get",
+            data:"k1=v1&k2=v2",
+            type:"post",
+            async:true,
+            dataType:"json",
+            success: function (backdata){
+                //修改dom.
+                console.log(backdata.ult);
+                // alert("a01")
+                $("#a01").text(backdata.ult+"g")
+                $("#a02").text(backdata.water+"ml")
+                $("#a03").text("Temperature"+backdata.tem+"°C"+"  Humidity"+backdata.hum+"%RH")
+            },error:function () {
+                alert("执行失败")
+            }
+        });
+    });
+
+    //食物剩余量
+    $("#tembtn").click(function () {
+        console.log("=======");
+        $.ajax({
+            url:"/api/get",
+            data:"k1=v1&k2=v2",
+            type:"post",
+            async:true,
+            dataType:"json",
+            success: function (backdata){
+                //修改dom.
+                let foodleft = backdata.ult+"g"
+                $("#a02").text(foodleft)
+            }
+        });
+    });
+
+    //储存水量
+    $("#weightbtn").click(function () {
+        console.log("=======");
+        $.ajax({
+            url:"/api/get",
+            data:"k1=v1&k2=v2",
+            type:"post",
+            async:true,
+            dataType:"json",
+            success: function (backdata){
+                //修改dom.
+                let waterleft=backdata.water+"ml"
+                $("#a01").text(waterleft)
+            }
+        });
+    });
+
+    //控制喂食喂水
+$("#postbtn").click(function () {
+    $.ajax({
+        url:"/api/post",
+        data:"k1=v1&k2=v2",
+        type:"post",
+        async:true,
+        dataType:"json",
+        success: function (backdata){
+            //修改dom.
+            alert(backdata);
+            console.log(backdata);
+        },error:function () {
+            alert("由于某些原因，连接失败！")
+        }
+    });
+})
+
+</script>
+
+</body>
+</html>

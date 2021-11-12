@@ -1,0 +1,30 @@
+server:
+  port: 9999
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/pet?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8
+    type: com.alibaba.druid.pool.DruidDataSource
+    messages:
+      basename: static/i18n/messages #相对路径 开头请勿添加斜杠
+#  jpa:
+#    generate-ddl: false
+#    hibernate:
+#      ddl-auto: none
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com:
+      example:
+        mapper:
+          debug
+

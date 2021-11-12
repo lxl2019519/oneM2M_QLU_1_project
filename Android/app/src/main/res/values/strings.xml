@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">远程自动宠物喂养机</string>
+    <string name="one_icon">喂食</string>
+    <string name="two_icon">喂水</string>
+    <string name="two_remind">当前剩余水量高度:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

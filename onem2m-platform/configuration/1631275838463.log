@@ -1,0 +1,13 @@
+!SESSION Fri Sep 10 20:10:38 GMT+08:00 2021 ------------------------------------
+!ENTRY org.eclipse.equinox.launcher 4 0 2021-09-10 20:10:38.476
+!MESSAGE Exception launching the Eclipse Platform:
+!STACK
+java.lang.ClassNotFoundException: org.eclipse.core.runtime.adaptor.EclipseStarter
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:650)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1472)
+
